@@ -4,19 +4,19 @@
 
 ## 1. 先研究工具
 
-1. 确认安装路径、启动方式、文档、数据格式、依赖和版本。本次路径是 `E:\Program Files\OpenSpine`。
+1. 确认安装路径、启动方式、文档、数据格式、依赖和版本。安装目录由使用者自行配置；自动化脚本统一从 `OPENSPINE_HOME` 环境变量或项目本地配置读取。
 2. 先用小工程验证图片加载、骨骼继承、旋转、保存重开、IK 和图片导出，再完成 04 第 0 节的 P0 导出、编译与隔离加载验证，最后批量制作。
 3. 区分编辑器、MCP、原生导出器和额外适配脚本的职责；“能读 JSON”不等于“能渲染完整动作”。
 4. 记录实际构建指纹。工具源码或编译版本变化后重新验证，不假设接口永远相同。
-5. 找不到其他本机工具时先查 [安装路径记录](<C:/Users/shuaichao/.codex/AGENTS_MD/APP_PATHS.md>)。
+5. 找不到其他工具时先查工具官方文档、当前团队的工具清单或项目配置；不要依赖某位维护者的个人路径记录。
 
 本次版本记录应按用途区分，不能用初版构建概括当前工程：
 
 | 用途 | 已记录版本 | 依据 |
 |---|---|---|
 | rig-v1 初版 | `0.2.91+2cd38f945350` | 历史 V1 记录，不是当前 V4 制作版本 |
-| rig-v4 工程写入与原生导出 | `0.2.91+365c7bddbbc5` | [V4 使用记录](<D:/steam/steamapps/common/Don't Starve Together/mods/lol_mod/output/openspine/2026-09-06-murk-wolf-C-rig-v4/OPENSPINE_GUIDE.md>)及其握手证据 |
-| rig-v4 最终结构校验 | `0.2.91+55b1832c502d` | [V4 verification.json](<D:/steam/steamapps/common/Don't Starve Together/mods/lol_mod/output/openspine/2026-09-06-murk-wolf-C-rig-v4/verification.json>) 的 `engine` |
+| rig-v4 工程写入与原生导出 | `0.2.91+365c7bddbbc5` | 案例归档中的 `output/openspine/2026-09-06-murk-wolf-C-rig-v4/OPENSPINE_GUIDE.md` 及其握手证据 |
+| rig-v4 最终结构校验 | `0.2.91+55b1832c502d` | 案例归档中同版本 `verification.json` 的 `engine` 字段 |
 
 这些记录的 Spine runtime 为 `4.3.5`，项目数据版本为 `4.3.0`。这是历史执行证据，不是对当前安装版本的猜测，也不是以后任务必须锁定的版本。后续分别记录编辑、采样、导出与校验构建；跨构建不能直接声称输出完全一致。
 
@@ -36,7 +36,7 @@
 
 本次没有操作桌面编辑器窗口；MCP 与隐藏 OpenGL 导出进程使用完后退出。不能把本次记录描述成已在桌面 UI 中逐项操作验证。
 
-后续如必须 UI 操作，遵守“启动与操作 -> UI 验证 -> 清理关闭”：先确认只操作本任务启动的窗口，记录进程；完成或明确失败后仅关闭本任务软件。截图或自动化失败时记录错误，只执行一次必要关闭，不继续无关尝试。清理后不再调用 computer-use、sky 或 node_repl；不操作和关闭用户原有窗口，不用 computer-use 执行终端命令。
+后续如必须操作桌面 UI，遵守“启动与操作 -> UI 验证 -> 清理关闭”：自动化前记录已有窗口和本任务启动的进程，只操作本任务启动的窗口；完成或明确失败后仅关闭本任务软件。截图或自动化失败时记录错误，执行一次必要关闭后停止 UI 自动化，不继续无关尝试；不要操作或关闭使用者原有窗口，也不要通过 UI 自动化代替终端命令。
 
 ## 3. 四方向转换
 
@@ -131,6 +131,6 @@ root
 
 编辑入口是 `projects/<个体>/<个体>.json`，应与 `images/` 和 `.json.openspine.json` 伴随文件一起保留。在编辑器中使用 Animate 模式，修改骨骼后确认确实写入关键帧；自由 Pose 不是已保存动画。
 
-当前使用说明、打开命令和依赖见 [rig-v4 OpenSpine 使用记录](<D:/steam/steamapps/common/Don't Starve Together/mods/lol_mod/output/openspine/2026-09-06-murk-wolf-C-rig-v4/OPENSPINE_GUIDE.md>)。历史复现脚本与覆盖风险见 [本次案例](<D:/steam/steamapps/common/Don't Starve Together/饥荒动作制作流程/05-三狼案例与返工复盘.md>)；不要用 V1 重建脚本覆盖后续修订。
+当前使用说明、打开命令和依赖记录在案例归档相对路径 `output/openspine/2026-09-06-murk-wolf-C-rig-v4/OPENSPINE_GUIDE.md`。历史复现脚本与覆盖风险见 [本次案例](05-三狼案例与返工复盘.md)；不要用 V1 重建脚本覆盖后续修订。
 
-OpenSpine 动作与预览完成只到 G5。最终还必须同版交付 SCML/PNG、官方 Mod Tools 实际编译的游戏 `anim/*.zip` 和构建校验记录，见 [最终交付规范](<D:/steam/steamapps/common/Don't Starve Together/饥荒动作制作流程/04-验收导出与游戏接入.md>)。
+OpenSpine 动作与预览完成只到 G5。最终还必须同版交付 SCML/PNG、官方 Mod Tools 实际编译的游戏 `anim/*.zip` 和构建校验记录，见 [最终交付规范](04-验收导出与游戏接入.md)。
