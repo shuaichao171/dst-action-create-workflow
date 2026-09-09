@@ -73,3 +73,5 @@ G0 需求与运行时契约
 ## 路径和发布约定
 
 流程仓库只发布 Markdown、示例模板和必要的 `.gitattributes`；不发布 OpenSpine、官方 Mod Tools、游戏安装、个人配置、案例大素材或本机缓存。项目使用相对路径，工具路径通过 `DST_GAME_HOME`、`OPENSPINE_HOME`、`DST_MOD_TOOLS_HOME`、`DST_SCML_ANALYZER` 或未提交的本地配置提供。对外打包流程目录时排除 `.git/`。
+
+OpenSpine 的公开获取入口是 [l1790780473/openspine](https://gitee.com/l1790780473/openspine)。使用者从该仓库下载或克隆后，将其本地目录设置为 `OPENSPINE_HOME`；流程只记录仓库地址、版本和构建哈希，不记录个人安装盘符。
